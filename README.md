@@ -6,6 +6,7 @@ Livro didático de Informática escrito colaborativamente pelos professores do g
 - Prof. Allan Garcia
 - Prof. Erick Bergamini
 - Prof. João Paulo
+- Prof. Charles Freitas
 - Prof. Clauber Bezerra
 
 ## Capítulos e Responsáveis
