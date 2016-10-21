@@ -1,0 +1,157 @@
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\flushleft INTRODUÇÃO}
+%  \renewcommand{\headrulewidth}{0.4pt}
+
+\mychapter{Introdução}
+
+\label{Cap:introducao}
+
+A riqueza de problemas complexos encontrados no mundo real para otimização tais como: telecomunicações, logística, transporte e planejamento financeiro não é uma tarefa trivial, pois existem inúmeras situações em que é impossível se construir um modelo detalhado para o problema, dada sua elevada complexidade. Por outro lado, um processo de simplificação de tal modelo pode causar perdas de informações relevantes que podem comprometer a sua qualidade. Além da dificuldade inerente  construção de modelos para tais problemas, uma característica que os acompanha durante a fase de resolução é a necessidade de processamento computacional de grande porte, o que na maioria das vezes, leva tais problemas a serem considerados intratáveis. Nesse contexto, inúmeras pesquisas têm se dedicado ao desenvolvimento de técnicas que visam facilitar a modelagem, e principalmente a resolução destes problemas~\cite{proc-limajunior08}.
+
+%
+\nomenclature{UFRN}{Universidade Federal do Rio Grande de Norte}%
+
+Na literatura existem várias técnicas para se obter soluções aproximadas de problemas intratáveis, uma delas é a Busca Reativa, que defende a integração do aprendizado de máquina dentro de técnicas de buscas heurísticas. A palavra ``reativo'' sugere uma pronta resposta aos eventos durante uma busca, através de um \textit{feedback} interno incremental para um autoajuste e uma adaptação dinâmica~\cite{livro-battiti}. A Busca Reativa diferencia dos outros tipos de técnicas na literatura pela sua busca adaptativa ao contexto, procurando novos espaços de busca para localização de soluções melhores do já encontrada, essa possivelmente um ótimo local. Eles os ótimos locais são responsáveis pela estagnação do processo de busca pela solução ótima global~\cite{livro-battiti}.
+
+%% e a todo o momento tentando fugir do ótimo local
+
+%%A Busca Reativa como qualquer outro algoritmo de busca, que busca a ponderação entre momentos de explotação na busca pela melhor solução na região de busca, e a exploração que busca regiões promissoras no espaço global de busca. O desenvolvimento da Busca Reativa têm se desenvolvido em diversas áreas do conhecimento, e têm obtido sucesso quando aplicadas a problemas como: 
+
+A Busca Reativa como qualquer outro algoritmo de busca heurística, tenta ponderar entre momentos de explotação, que consiste em localizar a melhor solução na região viável, e momentos de exploração de regiões promissoras no espaço global de soluções. A Busca Reativa têm sido abordada em diversas áreas do conhecimento, e têm obtido sucesso quando aplicadas a problemas como:
+
+\begin{itemize}
+ \item Problemas de Quadrático de Alocação (PQA) ou Alocação Quadrática~\cite{Fescioglu-Unver2008};
+ \item Atribuição de canais em redes celulares~\cite{proc-didem};
+ \item Roteamento ou escalonamento de veículos~\cite{art-wassan};
+ \item Matriz energética~\cite{proc-yoshikazu};
+ \item Veículos aéreos não tripulados~\cite{proc-ryan}.
+\end{itemize}
+
+Outro algoritmo de busca local chamado de Busca Tabu (BT)~\cite{livro-glover} explora um conjunto de princípios de buscas inteligentes para a solução de problemas, esse conjunto de princípios é composto por: 
+ \begin{itemize}
+ \item Estrutura de vizinhança: quando a modificação estrutural na solução provoca o movimento de uma solução à outra;
+ \item Atributos tabu: elementos que podem ser escolhidos para a solução estarão sujeitos a restrições;
+ \item Período tabu: o período em que tais elementos estarão sujeitos à restrição;
+ \item Critérios de aspiração: situações onde o status tabu conferido a uma transição pode ser ignorado.
+\end{itemize}
+
+Com essas características a Busca Tabu consegue obter resultado persistentes, quando aplicada nos seguintes problemas: 
+ \begin{itemize}
+ \item Otimização no posicionamento das estações de base para celulares~\cite{proc-rambally};
+ \item Problema de particionamento em circuitos~\cite{proc-areibi};
+\item Utilização da Busca Tabu em paralelo no treinamento das redes neurais para predição~\cite{proc-karaboga}.
+\end{itemize}
+
+Outra abordagem tem se destacado na solução de problemas de grande complexidade. Trata-se da Aprendizagem por Reforço (\textit{Reinforcement Learning}). Técnica de aprendizagem baseada na interação entre agente e ambiente, onde percepções do ambiente são transformadas em ações, sendo estas recompensadas ou punidas de acordo com as suas consequências sobre o ambiente. São normalmente utilizadas na solução de problemas de decisão markovianos, embora possam ser adaptadas para uma vasta classe de problemas de otimização~\cite{msc-joao}. Assim como a Busca Reativa e Busca Tabu a Aprendizagem por Reforço têm provido aplicações em diversas áreas, tais como:
+
+\begin{itemize}
+
+	\item Gerenciamento de redes móveis~\cite{proc-vucevic};
+	\item Matriz rodoviária~\cite{proc-balaji};
+	\item Informática na educação~\cite{proc-marcus};
+	\item Aplicações médicas~\cite{proc-ernst}.
+	
+\end{itemize}
+
+A ideia que esta no cerne deste trabalho é integrar a Busca Tabu com a Aprendizagem por Reforço num paradigma de Busca Reativa. A metodologia a ser seguida visa a modificação das versões tradicionais gerando uma versão híbrida com as duas técnicas em questão.
+
+\section{Motivação}
+\label{sec:motivação}
+
+Muita pesquisa tem sido feita com objetivo de desenvolver modelos combinatórios para problemas \texttt{NP-Árduos}, na sua maioria estes trabalhos são referentes a algoritmos heurísticos. Os algoritmos heurísticos são limitados pois não conseguem fugir de situações que levam o processo de busca a estagnar em um ótimo local. Como resposta ao anseio por heurísticas mais poderosas surgiram as metaheurísticas que podem ser vistas como heurísticas genéricas que são direcionadas à otimização global de um problema, podendo conter diferentes procedimentos heurísticos de construção e/ou busca local da solução a cada passo. 
+
+Qualquer metaheurística tem como desafio durante a busca pela solução ótima, o equilíbrio entre os processos de exploração e explotação. Estabelecer este equilíbrio consiste em decidir adequadamente sobre a necessidade ou não de experimentar novas situações (explorar novas áreas do espaço de solução), em detrimento daquelas já vivenciadas, ou seja, o desafio é resolver o dilema entre intensificar a busca nas regiões, no momento, consideradas promissoras, ou explorar na expectativas de encontrar regiões melhores no futuro. 
+
+Assim diante das dificuldades inerentes à resolução de problemas reais complexos, além do êxito conseguido pelas técnicas já citadas, esse trabalho propõe o desenvolvimento de um método híbrido, utilizando a Aprendizagem por Reforço e Busca Tabu de forma reativa ou adaptativa, ou seja, adaptando as técnicas citadas de acordo com contexto do problema. Com a utilização dessas técnicas em conjunto, busca-se contribuir para uma melhor eficiência e qualidade na obtenção das soluções. 
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+Para abordagens (algoritmos) que têm por objetivo a resolução de problemas de otimização, se deparam com o dilema da intensificação ou diversificação (\textit{exploration/exploitation}). O equilíbrio entre intensificar a busca local ou explorar o espaço de soluções a procura de novas e melhores soluções, sem dúvida deve ser apreciado para que não fique preso algum mínimo local. Para equalizar esse dilema utilizaremos a Busca Reativa, que permite o valor de cada parâmetro do algoritmo seja ajustado de forma adaptativa ou "reativa", tanto na Aprendizagem por Reforço (algoritmo \textit{Q-learning}) com o ajuste do valor do $\gamma$ (fator de desconto) e do $\alpha$ (coeficiente de aprendizagem), quanto da Busca Tabu com o ajuste do tamanho da lista tabu, quantidade de iterações que ele deve ficar na lista, que tipo de memória curto ou de lono prazo se deve utilizar. Sendo assim, este trabalho tem como objetivos:
+
+%%Como em qualquer abordagem que se propõe a resolução destes problemas citados, os algoritmos de otimização estão diretamente ligados ao dilema intensificação ou diversificação (\textit{exploration/exploitation}): trata-se da busca de equilíbrio entre intensificar a busca local ou explorar o espaço de soluções em busca de novas opções. Sem uma devida apreciação deste dilema o algoritmo pode facilmente ficar preso a um mínimo local. Com essa apreciação feita pode facilitar a fuga de mínimos locais e a determinação do timo global. Para equalizar esse problema utilizaremos a Busca Reativa, que permite a parametrização do algoritmo seja feita de forma adaptativa tanto na Aprendizagem por Reforço (algoritmo \textit{Q-learning}) com a parametrização do $\gamma$ (fator de desconto) e do $\alpha$ (coeficiente de aprendizagem), quanto da Busca Tabu com a parametrização do tamanho da lista tabu, quantidade de iterações que ele deve ficar na lista. Sendo assim, este trabalho tem como objetivos:
+
+\begin{itemize}
+	\item Estudar as potencialidades do uso conjunto do algoritmo \textit{Q-learning} da Aprendizagem por Reforço e a metaheurística Busca Tabu ambos de forma reativa para resolução de problemas de otimização combinatória como o problema do caixeiro viajante, buscando estabelecer um bom compromisso entre as etapas de intensificação e diversificação.
+	\item Propor uma nova metologia para solucionar problemas de buscas utilizando a Busca Reativa, Busca Tabu e Aprendizagem por Reforço.	
+	\item Realizar uma implementação das técnicas acima citadas e analisar sua(s) contribuição(ões) na aceleração e na qualidade da solução do problema. 
+\end{itemize}
+
+\section{Estado da Arte}
+\label{sec:estadodaarte}
+
+Para o adequamento e melhor desempenho das abordagens metaheurística na obtenção de solução de melhor qualidade, os parâmetros das mesmas não pode ser estáticos mais sim reativos, podendo assim adequar-se da melhor forma para dada situação no espaço de busca e até chegar ao ótimo global. E não perder a melhora no resultado da busca por não se adequar a situação quando necessitou de adaptação.
+
+A utilização da Busca Reativa (BR) teve início com o artigo de~\citeasnoun{battitiRTS1994}, onde propõem um algoritmo para otimização combinatória, no qual há um explicito controle em repetições no resultado da busca. O método ``aprende'' a ter uma lista tabu de tamanho apropriado de forma autoadaptativa, assim evitando ciclos na busca e melhor diversificação.
+%
+\nomenclature{BR}{Busca Reativa}%
+%
+\nomenclature{BT}{Busca Tabu}%
+
+Neste mesmo contexto outros exemplos interessantes podem ser citados: o trabalho de~\citeasnoun{proc-lindsey}, que implementa a Busca Reativa através do TOTEM \textit{chip}, para aplicações em propriedades físicas de altas energias (partículas).~\citeasnoun{art-battiti-neural} utilizaram a Busca Reativa Tabu para treinar redes neurais.~\citeasnoun{proc-bastos} implementaram a Busca Reativa com \textit{pool} de soluções elites, e~\textit{path-relinking} como estratégia de intensificação para resolver o Problema de Steiner em Grafos. 
+
+~\citeasnoun{proc-ryan} aplicam a Busca Tabu Reativa (BTR) para resolver o problema de roteamento de veículos aéreos não tripulados em simulações. Incorporando a simulação condições meteorológicas e probabilidade de sobrevivência do veículo, para calcular essa probabilidade é inserida na simulação condições aleatória para cada destino do veículo.~\citeasnoun{art-wassan} propõe uma abordagem baseada em uma utilização híbrida entre BRT e Memória Adaptativa para resolver o problema de roteamentos de veículos.~\citeasnoun{proc-didem} descrevem a BTR para o Problema de Alocação de Canal (PAC) em redes de celulares preocupando-se com a alocação e reuso do espectro de frequência para as estações de base.~\citeasnoun{proc-toune} propõe a BTR no serviço de restauração da distribuição de energia elétrica. 
+
+%
+\nomenclature{BTR}{Busca Tabu Reativa}%
+%
+\nomenclature{PAC}{Problema de Alocação de Canal}%
+
+Dentre outras publicações pertinentes,~\citeasnoun{art-hifi} propõem a busca local reativa para resolver o problema da mochila de múltipla escolha e multidimensional. A busca começa com uma solução inicial gulosa que é melhorada por um método rápido e iterativo trocando unidades da solução, após isso são introduzidos métodos para fugir do mínimo local e introduzir diversificação no espaço de busca respectivamente. Para evitar repetições de resultados na busca, uma ``memória'' dos resultados já encontrados é aplicada a busca.~\citeasnoun{art-olly} apresenta uma nova metaheurística com procedimento determinístico não no sentido amplo (metaheurísticas têm caráter estocástico), mas escolhido uma vizinhança de tamanho fixo e nesta vizinhança é feita uma busca exaustiva, isto é verifica-se todas as soluções possíveis nesta vizinhança. Baseada em modificações na VNS (\textit{Variable Neighborhood Search}) de forma reativa, para resolver o problema de roteamento de veículos com janela de tempo. O método proposto é baseado em quatro fases:
+
+%
+\nomenclature{VNS}{\textit{Variable Neighborhood Search}}%
+
+\renewcommand{\labelenumi}{\Roman{enumi}}
+
+\begin{enumerate}
+\item Primeira fase: várias soluções iniciais são criadas usando heurísticas de construção com diferentes combinações de valores nos parâmetros;
+\item Segunda fase: é feito um esforço para reduzir o número de rotas usando a abordagem baseada em cadeias de ejeção;
+\item Terceira fase: as soluções são melhoradas em termos da distância percorrida usando procedimentos de busca local;
+\item Quarta fase: a melhor solução encontrada é melhorada por modificações na função objetivo para escapar do mínimo local.
+\end{enumerate}
+
+\renewcommand{\labelenumi}{\arabic{enumi}}
+
+~\citeasnoun{art-rios} abordam o problema de \textit{design} para território (regiões) (\textit{Territory Design Problem}), motivado pela aplicação real para uma distribuidora bebida. A abordagem proposta com GRASP (\textit{Greedy Randomized Adaptive Search Procedure}) com características reativas, por permitir o autoajuste do parâmetro que regula a qualidade da lista restrita de candidatos, evitando na fase de busca local soluções ruins e não promissoras geradas pela fase de construção da solução. Seguindo a mesma linha~\citeasnoun{proc-gomes} propuseram o GRASP reativo para o problema de atribuição de frequência no caso discutido celulares, pois o número de canais disponíveis é bem menor do que o número de usuários que acessam. A solução encontrada foi à reutilização da frequência de canais e minimização ao máximo da interfêrencia na reutilização.
+%
+\nomenclature{TDP}{\textit{Territory Design Problem}}%
+%
+\nomenclature{GRASP}{\textit{Randomized Adaptive Search Procedure}}%
+
+Um trabalho bastante interessante é o de~\citeasnoun{art-ingber} no qual utiliza uma abordagem adaptativa do SA (\textit{Simulated Annealing}) chamado primeiramente de \textit{very fast simulated re-annealing}, após algum tempo passou a se chamar \textit{Adaptive Simulated Annealing} (ASA), no qual os parâmetros do algoritmo que controlam o ajuste da temperatura e a seleção aleatória dos passos, são ajustados automaticamente de acordo com o progresso do algoritmo. Nesta linha o trabalho de~\citeasnoun{proc-chen} utiliza o ASA para problemas de processamento de sinais não lineares com função custo multimodal e de suavização.~\citeasnoun{proc-kastella} utiliza o ASA para otimização nas rotas de aeronaves tripuladas em missões de ataque, foi desensenvolvido um controle adaptativo na temperatura do ASA reduzindo a sensibilidade do algoritmo para a taxa de resfriamento, dobrando a velocidade do algoritmo sem impactar na qualidade da solução produzida.
+
+Colocar as buscas locais novas!!!!!!!!
+
+%
+\nomenclature{SA}{\textit{Simulated Annealing}}%
+%
+\nomenclature{ASA}{\textit{Adaptive Simulated Annealing}}%
+
+No que se refere a integração da Aprendizagem por Reforço com as metaheurísticas podemos destacar os trabalhos descritos abaixo:
+
+No trabalho de ~\citeasnoun{phd-lima} desenvolveu uma proposta de utilização de Aprendizagem por Reforço (AR) na melhoria das metaheurísticas GRASP e Algoritmo Genético (AG). Na fase construtiva da metaheurística GRASP utiliza-se a matriz \textit{Q} do algoritmo \textit{Q-learning} da Aprendizagem por Reforço como construtor das soluções iniciais, constituindo um mecanismo de memória capaz de repetir no futuro, as boas decisões tomadas no passado. 
+%
+\nomenclature{AG}{Algoritmo Genético}%
+%
+\nomenclature{AR}{Aprendizagem por Reforço}%
+
+No que diz respeito ao Algoritmo Genético, utilizou o algoritmo \textit{Q-learning} na geração da população inicial do AG, conseguindo uma população inicial de boa qualidade, tanto nos aspecto do valor da função objetivo, quanto no aspecto relativo ao nível de diversidade da mesma. Uma outra importante inovação proposta neste método foi a atuação cooperativa entre o algoritmo \textit{Q-learning} e os operadores  genéticos.
+
+
+Um trabalho também interessante utilizando o agente da Aprendizagem por Reforço com Algoritmos Genéticos~\citeasnoun{proc-pettinger} propuseram um algoritmo híbrido chamando RL-GA, o agente utiliza \textit{Q}($\lambda$) para estimar os valores de utilidade dos pares estado-ação ao escolher um específico operador genético, e os indivíduos da população aos quais tais operadores serão aplicados. Desta forma, o agente influencia a seleção de ambos os pares para o \textit{crossover} e operadores de mutação, bem como a seleção de indivíduos para reprodução a cada geração.
+
+Continuando a mesma abordagem da Aprendizagem por Reforço através de seu algoritmo \textit{Q-learning} em conjunto com os algoritmos genéticos temos o artigo de~\citeasnoun{proc-victor} para a resolução do problema do caixeiro viajante assimétrico, essa abordagem combina características de busca global e local: informações locais com a AR e informações globais com a população do algoritmo genético. Na abordagem proposta a cada nova solução gerada parte por um indivíduo da população do algoritmo genético e outra parte ajustável pelo parâmetro $\lambda$ dos valores vindos do \textit{Q-learning} pela sua matriz de \textit{Q}-valores.
+%%, onde o parâmetro $\lambda$ pode ser zero para toda solução a ser gerada será realizada pelo \textit{Q-learning}
+
+\citeasnoun{art-guo}, desenvolve o algoritmo \textit{Q-learning} de forma customizada, denominado \textit{SA-Q-learning} utilizando o critério de \textit{Metropolis} do \textit{Simulated Annealing} com o objetivo de equilibrar os processos de explotação e exploração na busca da solução ótima. A estratégia proposta modifica o algoritmo \textit{Q-learning} original substituindo a regra $\epsilon$-gulosa geralmente utilizada na escolha de uma ação, por outra construída com base no critério de \textit{Metropolis}. Outro trabalho proposto~\citeasnoun{proc-atiya} abordam um método de Aprendizagem por Reforço que utiliza a metaheurística \textit{Adaptive Simulated Annealing}, o método de AR proposto pelos autores consiste da melhoria da função valor através do uso da metaheurística ASA. 
+
+Outra integração com a Aprendizagem por Reforço é feita com a metaheurística Busca Tabu foi abordada por~\citeasnoun{proc-abramson} que coloca a metaheurística em questão como estratégia de exploração em conjunto com o método de Aprendizagem por Reforço conhecido como \textit{Sarsa Learning Vector Quantization} (SLVQ). Utiliza-se a Busca Tabu para evitar a formação de ciclos, o que significa voltar a soluções já visitadas pela busca, e consequentemente atrelado a um mínimo local.
+
+%
+\nomenclature{SLVQ}{ \textit{Sarsa Learning Vector Quantization}}%
+
+\section{Organização do trabalho}
+\label{sec:organização}
+
+O presente trabalho está organizado da seguinte forma: no capítulo 2, apresenta-se uma descrição de alguns conceitos de Busca Reativa. No capítulo 3, são tratados os conceitos básicos da metaheurística Busca Tabu, enquanto que no capítulo 4, abordam-se conceitos sobre processos de decisão markovianos e aprendizagem por reforço, com enfoque no algoritmo \textit{Q-learning}. No capítulo 5, apresenta-se a abordagem entre a Busca Reativa, Busca Tabu e Aprendizagem por Reforço e cronograma de atividades.

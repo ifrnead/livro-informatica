@@ -1,0 +1,194 @@
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\flushleft INTRODUÇÃO}
+%  \renewcommand{\headrulewidth}{0.4pt}
+
+\mychapter{Introdução}
+
+\label{Cap:introducao}
+
+A riqueza de problemas complexos encontrados no mundo real para otimização tais como: telecomunicações, logística, transporte e planejamento financeiro não é uma tarefa fácil, pois existem inúmeras situações em que é impossível se construir um modelo detalhado para o problema, dada sua elevada complexidade. Por outro lado, um processo de simplificação de tal modelo pode causar perdas de informações relevantes que podem comprometer a sua qualidade. Além da dificuldade inerente construção de modelos para tais problemas, uma característica que os acompanha durante a fase de resolução é a necessidade de processamento computacional de grande porte, o que na maioria das vezes, leva tais problemas a serem considerados intratáveis, um problema é dito intratável quando não existe um algoritmo em tempo polinomial que o resolva. Nesse contexto, inúmeras pesquisas têm se dedicado ao desenvolvimento de técnicas que visam facilitar a modelagem, e principalmente a resolução destes problemas \cite{phd-lima}.
+
+%
+\nomenclature{UFRN}{Universidade Federal do Rio Grande de Norte}%
+
+Uma destas técnicas desenvolvidas foi a busca local por \citeasnoun{Croes1958} e \citeasnoun{Bock1958}, para os problemas de otimização, onde gera-se uma solução inicial através de uma heurística construtiva, para cada solução, e uma vizinhança composta por um conjunto de soluções com características muito próximas. Dada uma solução corrente, percorre-se a vizinhança dessa solução em busca de outra com melhor valor. Se esta solução vizinha for encontrada, torna-se a melhor solução encontrada e o algoritmo continua a busca. Caso contrário a solução encontrada é um ótimo local em relação a vizinhança adotada. 
+
+Esse tipo de busca é determinado por uma decisão baseada apenas em conhecimento local do espaço de busca\footnote{São todas as soluções possíveis para determinado problema.}. Além disso, os métodos de busca local podem visitar o mesmo local dentro do espaço de busca mais de uma vez. Na verdade, muitos algoritmos de busca local está propenso a ficar preso em alguma parte do espaço de busca que eles não podem escapar sem o uso de mecanismos especiais, tais como reiniciar o processo de busca do ótimo ou realizar algum tipo de medida para a diversificação, tal como uma pertubação da solução. Consequentemente a busca local não produz um resultado uniforme em todo o espaço de busca e não possui comportamento uniforme para as todas as classes e instâncias\footnote{Usa-se o termo instância (do inglês instance) para se referir à atribuição de valores às variáveis de entrada de um problema.} de problemas de otimização \cite{HolgerandStutzle2005}.
+
+Uma abordagem que se pode propor para solucionar essa problemática de não se ter uma boa abrangência no espaço de busca, vêm com a utilização de várias técnicas de buscas locais neste espaço de busca para torna-lá mais robusta em relação ao processo de busca da solução ótima. Essa abordagem referida pode ser solucionada por uma metaheurística, que são baseadas em procedimentos heurísticos, principalmente aplicáveis para problemas de otimização combinatória e no qual produz um processo de busca estocástica no espaço de busca \cite{Talbi2009}, e têm resolvido diferentes problemas com sucesso de grande importância prática, dentre os quais, pode-se citar:
+
+\begin{itemize}
+\item Roteamento para atendimento médico \cite{pacheco2008};
+\item Sequenciamento de DNA \cite{Blazewicz2008};
+\item Matriz energética \cite{Eghbal2007};
+\item Engenharia de Software \cite{Clarke2003};
+\item Projetos de chips VLSI \cite{Faroe2001};
+\end{itemize}
+
+
+A metaheurística que utiliza várias buscas locais foi proposta por \citeasnoun{Hansen1997} chamada de VNS (\textit{Variable Neighborhood Search}) Busca em Vizinhança Variável que têm como principal caraterística explorar o espaço de busca por meio de trocas sistemáticas de estruturas de vizinhança (buscas locais) aleatoriamente. O VNS explora vizinhanças gradativamente mais ``distantes'' da solução corrente ao invés de outras estratégias de buscas locais que segue uma mesma trajetória.
+%
+\nomenclature{VNS}{\textit{Variable Neighborhood Search}}%
+
+Uma característica do VNS é que as buscas locais são escolhidas aleatoriamente, não possuindo assim uma forma de ter um aprendizado ao selecionar qual busca local pode ser a melhor alternativa para sair da estagnação da busca local selecionada anteriormente, no dado instante em que a busca se encontra. Através deste mesmo aprendizado podemos depois de um determinado período selecionar outra busca pelo fato da atual não fornecer o retorno adequado e outra opção de busca local poderá fornecer. 
+
+Neste contexto surgiu a Busca Reativa ou autoadaptativa que defende a integração do aprendizado de máquina \footnote{É um subcampo da inteligência artificial dedicado ao desenvolvimento de algoritmos e técnicas que permitam ao computador aprender, isto é, que permitam ao computador aperfeiçoar seu desempenho em alguma tarefa.} dentro de técnicas de buscas. A palavra ``reativo'' sugere uma pronta resposta aos eventos durante uma busca, através de um \textit{feedback} interno incremental para um autoajuste e uma adaptação dinâmica. A Busca Reativa diferencia dos outros tipos de técnicas na literatura pela sua busca adaptativa ao contexto, procurando novos espaços de busca para localização de soluções melhores do já foi encontrado, esse possivelmente um ótimo local. Eles os ótimos locais são responsáveis pela estagnação do processo de busca pela solução ótima global \cite{Battiti2008}. A Busca Reativa têm obtido sucesso quando aplicadas a problemas como:
+
+\begin{itemize}
+ \item Problemas de Quadrático de Alocação (PQA) ou Alocação Quadrática~\cite{Fescioglu2008};
+ \item Atribuição de canais em redes celulares~\cite{Gozupek2009};
+ \item Roteamento ou escalonamento de veículos~\cite{wassan2007};
+ \item Matriz energética~\cite{Fukuyama2000};
+\end{itemize}
+
+Quem vai conduzir essa busca autoadaptativa ou reativa é a Aprendizagem por Reforço, que baseia-se na capacidade do agente obter conhecimento interagindo com o ambiente desconhecido no qual está inserido. Uma das grandes vantagens da aprendizagem por reforço é justamente a capacidade de, ao interagir com um ambiente desconhecido, o agente evoluir através da identificação das características deste ambiente, dispensando a atuação de um professor como acontece na aprendizagem supervisionada. Na Aprendizagem por Reforço também tem aplicações em diversas áreas, tais como:
+
+\begin{itemize}
+\item Navegação de robôs \cite{Faria1999};
+\item Gerência de fluxo em tráfego aéreo \cite{Alves2006};
+\item Aplicações médicas \cite{Ernst2006};
+\item Atribuições de Frequências em telefonia celular \cite{Singh1997}
+\end{itemize}
+
+Mais especificamente o algoritmo da Aprendizagem por Reforço que utilizaremos neste trabalho é o \textit{Q-learning}, como uma estratégia de qual busca local deve ser escolhida pela metaheurística VNS aplicado a um problema de otimização combinatória. Acrescentando também o dilema do equilíbrio entre o processo de diversificação ou intensificação, outro aspecto à considerar é o grande número de possíveis soluções que se tem em problemas de otimização combinatória.
+
+Baseado nas técnicas reconhecidas que estão acima mencionadas e pelas dificuldades encontradas no mundo real, este presente trabalho propõe o desenvolvimento de um método reativo usando aprendizagem por reforço e as buscas locais com o VNS, para se autoadaptar ao contexto da busca e assim não ficar preso a um mínimo local.
+
+
+\section{Motivação}
+\label{sec:motivacao}
+
+
+Desde o final da década de 60 têm sido feita muita pesquisa com o objetivo de desenvolver modelos combinatórios para problemas $NP$-difíceis\footnote{Ser??? dada sua definição no capitulo \ref{Cap:fundTeo}} \cite{Gilbert1968}, \cite{Rothfarb1970}.
+em sua maioria estes trabalhos são referentes a algoritmos heurísticos. Os algoritmos heurísticos são limitados pois não conseguem fugir de situações que leva o processo de busca a estagnar em um ótimo local. A evolução natural deste modelos são as metaheurísticas são estratégias baseadas em procedimentos heurísticos, aplicáveis principalmente aos
+problemas de otimização e que produzem um processo simplificado de busca estocástica no espaço de solução \cite{Sevkli2006}, podendo conter diferentes procedimentos heurísticos de construção e/ou busca local na solução a cada passo.
+
+Qualquer metaheurística têm como desafio durante a busca pela solução ótima, o equilíbrio entre os processos de exploração e explotação. Estabelecer este equilíbrio consiste em decidir adequadamente sobre a necessidade ou não de experimentar novas situações (explorar novas áreas do espaço de solução), em detrimento daquelas já vivenciadas, ou seja, o desafio é resolver o dilema entre intensificar a busca nas regiões, no momento, consideradas promissoras, ou explorar na expectativa de encontrar regiões melhores no futuro. 
+
+%
+\nomenclature{NP}{Não-determinístico Polinomial}%
+
+O desenvolvimento das metaheurísticas é caracterizado por escolha de parâmetros para sua execução, na qual a opção apropriada destes parâmetros (valores). Onde o ajuste de parâmetro é essencial testa-se os parâmetros até que resultados viáveis sejam obtidos. A qualidade dos resultados de uma instância de teste não será transferida para outras instâncias a serem testadas e seu \textit{feedback} pode requerer um processo lento de ``tentativa e erro'' onde o algoritmo têm que ser ajustado para uma aplicação especifica. 
+
+Diante deste contexto das metaheurísticas surgiu a Busca Reativa que defende a integração entre o aprendizado de máquina dentro de buscas heurísticas para solucionar problemas de otimização complexos. A palavra reativo sugere uma resposta pronta para os eventos durante a busca através de um \textit{feedback} iterativo para um autoajuste e uma adaptação dinâmica. Na Busca Reativa o histórico de busca e o conhecimento acumulado enquanto há a movimentação na configuração do espaço de busca é usado para uma autoadaptação de forma autônoma: o algoritmo mantém a flexibilidade interna necessária para lidar com diferentes situações durante a busca, com a adaptação automatizada o algoritmo utiliza sua experiência passada para refletir na fase atual \cite{Battiti2008}. 
+
+A partir da integração que a Busca Reativa propõe entre o aprendizado de máquina e as metaheurísticas, surgiu a ideia de se colocar a Aprendizagem por Reforço mais especificamente o algoritmo \textit{Q-learning} de forma reativa, para selecionar qual busca local é a mais indicada em determinado instante da busca, para suceder uma outra busca local que não pode mais melhorar a solução corrente na metaheurística VNS. Por entender, que tais técnicas utilizadas conjuntamente podem cooperar mutuamente para um bom desempenho computacional propõe-se neste trabalho o 
+a implementação da Busca Reativa com a metaheurística VNS para de forma reativa ou autoadaptativa selecionar a busca local mais adequada para determinado instante da busca.
+
+\section{Objetivo}
+\label{sec:obj}
+
+O equilíbrio entre intensificar a busca local ou explorar o espaço de soluções a procura de novas e melhores soluções, sem dúvida deve ser apreciado para que não fique preso algum mínimo local. Para equalizar esse dilema utilizaremos a Busca Reativa, que permita a seleção da busca local da metaheurística VNS de forma autoadaptativa ou reativa, espera-se com o passar do tempo que tome decisões que resultem em soluções melhores. A troca inteligente da busca local por outra é feita pelo agente da Aprendizagem por Reforço de acordo com o contexto em que o agente se encontra, não ficando em mínimos locais e facilitando a determinação do ótimo global. Assim sendo, este trabalho tem como objetivos:
+
+ \begin{itemize}
+   \item[] \textbf{Geral:}
+ 
+   \begin{itemize}
+   	\item Melhorar o desempenho das buscas locais da metaheurística VNS, através da utilização de uma estratégia reativa baseada em aprendizagem por reforço.
+	\end{itemize}
+
+ 	\item[] \textbf{Específicos:}
+    \begin{itemize}
+   	\item Estudar as potencialidades do uso do algoritmo \textit{Q-learning} da Aprendizagem por Reforço como  estratégia reativa para as buscas locais da metaheurística VNS. Para atingir esta meta propõe-se um algoritmo que utiliza a matriz dos Q-valores gerada pelo algoritmo \textit{Q-learning} como mecanismo de autoadaptação para as buscas locais da referida metaheurística;
+   	\item Propor uma nova metologia para solucionar problemas de busca utilizando Busca Reativa, Aprendizagem por Reforço e VNS;
+	\item Validar os resultados computacionais obtidos com o algoritmo proposto, através da análise estatística dos dados experimentais.
+	\end{itemize}
+ \end{itemize}
+ 
+\section{Estado da Arte}
+\label{sec:estarte}
+
+Para a adequação e melhor desempenho das abordagens metaheurística na obtenção de solução de melhor qualidade, os parâmetros das mesmas não pode ser estáticos mais sim reativos, podendo assim adequar-se da melhor forma para dada situação no espaço de busca e até chegar ao ótimo global.
+
+A utilização da Busca Reativa (BR) teve início com o artigo de~\citeasnoun{battitiRTS1994}, onde propõem um algoritmo para otimização combinatória, no qual há um explicito controle em repetições no resultado da busca. O método ``aprende'' a ter uma lista tabu de tamanho apropriado de forma autoadaptativa, assim evitando ciclos na busca e melhor diversificação.
+
+%
+\nomenclature{BR}{Busca Reativa}%
+%
+\nomenclature{BT}{Busca Tabu}%
+
+
+Neste mesmo contexto outros exemplos interessantes podem ser citados: o trabalho de~\citeasnoun{Lindsey1996}, que implementa a Busca Reativa através do TOTEM \textit{chip}, para aplicações em propriedades físicas de altas energias (partículas).~\citeasnoun{battitineural1995} utilizaram a Busca Reativa Tabu para treinar redes neurais. \citeasnoun{bastos1999} implementaram a Busca Reativa com \textit{pool} de soluções elites, e \textit{path-relinking} como estratégia de intensificação para resolver o Problema de Steiner em Grafos. 
+
+~\citeasnoun{ryan1998} aplicam a Busca Tabu Reativa (BTR) para resolver o problema de roteamento de veículos aéreos não tripulados em simulações. Incorporando a simulação condições meteorológicas e probabilidade de sobrevivência do veículo, para calcular essa probabilidade é inserida na simulação condições aleatória para cada destino do veículo.~\citeasnoun{wassan2007} propõe uma abordagem baseada em uma utilização híbrida entre BRT e Memória Adaptativa para resolver o problema de roteamentos de veículos.~\citeasnoun{Gozupek2009} descrevem a BTR para o Problema de Alocação de Canal (PAC) em redes de celulares preocupando-se com a alocação e reuso do espectro de frequência para as estações de base.~\citeasnoun{toune1998} propõe a BTR no serviço de restauração da distribuição de energia elétrica. 
+
+%
+\nomenclature{BTR}{Busca Tabu Reativa}%
+%
+\nomenclature{PAC}{Problema de Alocação de Canal}%
+
+Dentre outras publicações pertinentes,~\citeasnoun{Hifi2006} propõem a Busca Local Reativa para resolver o Problema da Mochila de Múltipla Escolha e Multidimensional. A busca começa com uma solução inicial gulosa que é melhorada por um método rápido e iterativo trocando unidades da solução, após isso são introduzidos métodos para fugir do mínimo local e introduzir diversificação no espaço de busca respectivamente. Para evitar repetições de resultados na busca, uma ``memória'' dos resultados já encontrados é aplicada a busca. No trabalho de \citeasnoun{Bogl2011} analisa o desempenho da busca local (\textit{first-improvement} e \textit{best-improvement}), busca tabu reativa e VNS em termos de qualidade da solução, sobre o Problema do Caixeiro Viajante com Janela de Tempo (PCVJT). As buscas locais utilizadas pela BTR foram as mesmas utilizadas pelo VNS. Fazendo uma comparação dos resultados obtidos entre o impacto da busca local isolada e em conjunto com a BTR e VNS, sendo capaz de indicar com precisão o impacto em cada uma. 
+
+%
+\nomenclature{PMMEM}{Problema da Mochila de Múltipla Escolha e Multidimensional}%
+%
+\nomenclature{PCVJT}{Problema do Caixeiro Viajante com Janela de Tempo}%
+%
+\nomenclature{PMG}{Problema de Mediana Genômica}%
+
+Para o Problema de Mediana Genômica (PMG) foi desenvolvida uma Busca Local Estocástica Reativa por \citeasnoun{Lenne2008} que é baseada em busca local iterada e busca tabu, foi desenvolvido um método reativo que adapta automaticamente o comprimento lista tabu para a busca tabu e também a intensidade da perturbação para a busca local iterada. \citeasnoun{olly2003} apresenta uma nova metaheurística com procedimento determinístico não no sentido amplo (metaheurísticas têm caráter estocástico), mas escolhido uma vizinhança de tamanho fixo e nesta vizinhança é feita uma busca exaustiva, isto é verifica-se todas as soluções possíveis nesta vizinhança. Baseada em modificações na metaheurística VNS de forma reativa, para resolver o problema de roteamento de veículos com janela de tempo. O método proposto é baseado em quatro fases:
+
+\renewcommand{\labelenumi}{\Roman{enumi}}
+
+\begin{enumerate}
+\item Primeira fase: várias soluções iniciais são criadas usando heurísticas de construção com diferentes combinações de valores nos parâmetros;
+\item Segunda fase: é feito um esforço para reduzir o número de rotas usando a abordagem baseada em cadeias de ejeção\footnote{Seleciona sucessivamente um conjunto de elementos que serão designados a um novo estado, de tal forma que cada passo a mudança de estado depende do elemento do passo anterior, criando uma reação em cadeia.};
+\item Terceira fase: as soluções são melhoradas em termos da distância percorrida usando procedimentos de busca local;
+\item Quarta fase: a melhor solução encontrada é melhorada por modificações na função objetivo para escapar do mínimo local.
+\end{enumerate}
+
+\renewcommand{\labelenumi}{\arabic{enumi}}
+
+
+~\citeasnoun{rios2009} abordam o problema de \textit{design} para território (regiões) (\textit{Territory Design Problem}), motivado pela aplicação real para uma distribuidora bebida. A abordagem proposta com GRASP (\textit{Greedy Randomized Adaptive Search Procedure}) com características reativas, por permitir o autoajuste do parâmetro que regula a qualidade da lista restrita de candidatos, evitando na fase de busca local soluções ruins e não promissoras geradas pela fase de construção da solução. Seguindo a mesma linha~\citeasnoun{gomes2001} propuseram o GRASP reativo para o problema de atribuição de frequência no caso discutido em celulares, pois o número de canais disponíveis é bem menor do que o número de usuários que acessam, e com as técnicas utilizadas para essa atribuição tendem a se tornarem obsoletas com o aumento de usuários. A solução encontrada foi à reutilização da frequência de canais e minimização ao máximo da interferência nesta reutilização.
+
+%
+\nomenclature{TDP}{\textit{Territory Design Problem}}%
+%
+\nomenclature{GRASP}{\textit{Randomized Adaptive Search Procedure}}%
+
+Um trabalho bastante interessante é o de~\citeasnoun{Ingber1989} no qual utiliza uma abordagem adaptativa do SA (\textit{Simulated Annealing}) chamado primeiramente de \textit{very fast simulated re-annealing}, após algum tempo passou a se chamar \textit{Adaptive Simulated Annealing} (ASA), no qual os parâmetros do algoritmo que controlam o ajuste da temperatura e a seleção aleatória dos passos, são ajustados automaticamente de acordo com o progresso do algoritmo.~\citeasnoun{Kastella1991} utiliza o ASA para otimização nas rotas de aeronaves tripuladas em missões de ataque, foi desenvolvido um controle adaptativo na temperatura do ASA reduzindo a sensibilidade do algoritmo para a taxa de resfriamento, dobrando a velocidade do algoritmo sem impactar na qualidade da solução produzida.
+
+
+%
+\nomenclature{SA}{\textit{Simulated Annealing}}%
+%
+\nomenclature{ASA}{\textit{Adaptive Simulated Annealing}}%
+
+
+No que se refere a integração da Aprendizagem por Reforço com as metaheurísticas podemos destacar os trabalhos descritos abaixo:
+
+No trabalho de ~\citeasnoun{phd-lima} desenvolveu uma proposta de utilização de Aprendizagem por Reforço (AR) na melhoria das metaheurísticas GRASP e Algoritmo Genético (AG). Na fase construtiva da metaheurística GRASP utiliza-se a matriz \textit{Q} do algoritmo \textit{Q-learning} da Aprendizagem por Reforço como construtor das soluções iniciais, constituindo um mecanismo de memória capaz de repetir no futuro, as boas decisões tomadas no passado. 
+%
+\nomenclature{AG}{Algoritmo Genético}%
+%
+\nomenclature{AR}{Aprendizagem por Reforço}%
+
+No que diz respeito ao Algoritmo Genético, utilizou o algoritmo \textit{Q-learning} na geração da população inicial do AG, conseguindo uma população inicial de boa qualidade, tanto nos aspecto do valor da função objetivo, quanto no aspecto relativo ao nível de diversidade da mesma. Uma outra importante inovação proposta neste método foi a atuação cooperativa entre o algoritmo \textit{Q-learning} e os operadores  genéticos. Um trabalho também interessante utilizando o agente da Aprendizagem por Reforço com Algoritmos Genéticos~\citeasnoun{Pettinger2002} propuseram um algoritmo híbrido chamando RL-GA, o agente utiliza \textit{Q}($\lambda$) para estimar os valores de utilidade dos pares estado-ação ao escolher um específico operador genético, e os indivíduos da população aos quais tais operadores serão aplicados. Desta forma, o agente influencia a seleção de ambos os pares para o \textit{crossover} e operadores de mutação, bem como a seleção de indivíduos para reprodução a cada geração.
+
+Continuando a mesma abordagem da Aprendizagem por Reforço através de seu algoritmo \textit{Q-learning} em conjunto com os algoritmos genéticos temos o artigo de~\citeasnoun{Victor1999} para a resolução do Problema do Caixeiro Viajante Assimétrico (PCVA), essa abordagem combina características de busca global e local: informações locais com a AR e informações globais com a população do algoritmo genético. Na abordagem proposta a cada nova solução gerada parte por um indivíduo da população do algoritmo genético e outra parte ajustável pelo parâmetro $\lambda$ dos valores vindos do \textit{Q-learning} pela sua matriz de \textit{Q}-valores.
+
+%
+\nomenclature{PCVA}{Problema do Caixeiro Viajante Assimétrico}%
+
+\citeasnoun{Guo2004}, desenvolve o algoritmo \textit{Q-learning} de forma customizada, denominado \textit{SA-Q-learning} utilizando o critério de \textit{Metropolis} do \textit{Simulated Annealing} com o objetivo de equilibrar os processos de explotação e exploração na busca da solução ótima. A estratégia proposta modifica o algoritmo \textit{Q-learning} original substituindo a regra $\epsilon$-gulosa geralmente utilizada na escolha de uma ação, por outra construída com base no critério de \textit{Metropolis}. Outro trabalho proposto~\citeasnoun{Atiya2003} abordam um método de Aprendizagem por Reforço que utiliza a metaheurística \textit{Adaptive Simulated Annealing}, o método de AR proposto pelos autores consiste da melhoria da função valor através do uso da metaheurística ASA. 
+
+Outra integração com a Aprendizagem por Reforço é feita com a metaheurística Busca Tabu foi abordada por~\citeasnoun{Abramson2003} que coloca a metaheurística em questão como estratégia de exploração em conjunto com o método de Aprendizagem por Reforço conhecido como \textit{Sarsa Learning Vector Quantization} (SLVQ). Utiliza-se a Busca Tabu para evitar a formação de ciclos, o que significa voltar a soluções já visitadas pela busca, e consequentemente atrelado a um mínimo local.
+
+%
+\nomenclature{SLVQ}{ \textit{Sarsa Learning Vector Quantization}}%
+
+\section{Principais Contribuições do Trabalho}
+\label{sec:contribuicao}
+
+
+\begin{itemize}
+\item Proposta da Busca Reativa através da Aprendizagem por Reforço para a seleção da busca local no VNS;
+\item Implementação do VNS dotado de um mecanismo reativo ou autoadaptativo que seleciona qual a melhor busca local em relação a várias busca locais, que para determinado contexto de busca é a melhor escolha;
+\item Elaboração da análise estatística dos resultados experimentais, através de teste de hipótese e análise de sobrevivência.
+\end{itemize}
+
+\section{Organização do trabalho}
+\label{sec:organização}
+
+Este trabalho está organizado da seguinte forma: No capítulo \ref{Cap:fundTeo} é apresentada uma breve fundamentação teórica abrangendo conceitos de otimização combinatória, as diferentes abordagens de resolução existentes, e a descrição sucinta dos métodos exatos e aproximativos. No capítulo \ref{Cap:blrsvns} são descritas em detalhes as Buscas Locais, Busca Reativa e VNS que fazem parte do estudo. No capítulo \ref{Cap:pdm_ar} abordam-se conceitos sobre processos de decisão markovianos aprendizagem por reforço, com enfoque no algoritmo \textit{Q-learning}. No capítulo \ref{Cap:medprop} como foi feita a metodologia de trabalho e implementação do algoritmo proposto neste trabalho. O capítulo \ref{Cap:resultadoexp} apresenta os resultados experimentais obtidos e uma análise estatísticas dos mesmos. No capítulo \ref{Cap:conclusoes} são apresentadas algumas conclusões e perspectivas. No anexo \ref{Cap:apendice} são disponibilizados a listagens de todos resultados obtidos nos experimentos realizados.
